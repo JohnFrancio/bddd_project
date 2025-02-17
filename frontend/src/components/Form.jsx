@@ -1,14 +1,57 @@
+import React, { useState, useEffect } from 'react';
+
 const Form = () => {
+
+    const [file, setFile] = useState(null);
+    const [delimiter, setDelimiter] = useState(null);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const data = { file, delimiter };
+
+        fetch('http://127.0.0.1:8000/api/insert-table', {
+            method: 'POST', // Specify the method
+            headers: {
+                'Content-Type': 'application/json', // Content type to be sent to the server
+            },
+            body: JSON.stringify(data), // Convert the data object to a JSON string
+        })
+            .then(response => response.json()) // Parse the JSON response from the server
+            .then(result => {
+                console.log('Success:', result); // Handle the response
+            })
+            .catch(error => {
+                console.error('Error:', error); // Handle any errors
+            });
+    }
+
     return (
-        <div className="w-full">
-            <form className=" bg-amber-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                <div className="mb-32">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">
+        <div className="w-[50%] m-auto mt-16">
+            <div className="flex flex-col items-center">
+                <h2 className="text-2xl text-black font-bold">Upload Data</h2>
+            </div>
+            <form className="m-auto shadow-gray-600" onSubmit={handleSubmit}>
+                <div className="my-16 ">
+                    <label className="text-gray-700 text-xl font-bold mb-2 mt-5 flex flex-col items-center">
                         Add File here
                     </label>
-                    <input type="file" accept=".txt" className=" border border-amber-300" />
+                    <input
+                        className=" border  mx-16 w-[85%] rounded-4xl py-2 px-6"
+                        type="file"
+                        name='file'
+                        accept=".txt"
+                    />
+                    <label className="text-gray-700 text-xl font-bold mb-2 mt-8 flex flex-col items-center">
+                        Add Separator
+                    </label>
+                    <input
+                        className=" border  mx-16 w-[85%] rounded-4xl py-2 px-6"
+                        type="text"
+                        name='delimiter'
+                        placeholder="Please enter only the separator"
+                    />
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col items-center">
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                         Add To Database
                     </button>
