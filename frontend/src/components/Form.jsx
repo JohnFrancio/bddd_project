@@ -4,11 +4,18 @@ const Form = () => {
 
     const [file, setFile] = useState(null);
     const [delimiter, setDelimiter] = useState(null);
+    const [message, setMessage] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = { file, delimiter };
+<<<<<<< HEAD
         console.log(delimiter);
+=======
+
+        console.log(data)
+
+>>>>>>> 5cbb6ba2c256bf08d86c954cf75b8e54a60a5751
         fetch('http://127.0.0.1:8000/api/insert-table', {
             method: 'POST', // Specify the method
             headers: {
