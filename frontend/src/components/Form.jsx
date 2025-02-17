@@ -8,7 +8,7 @@ const Form = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = { file, delimiter };
-
+        console.log(delimiter);
         fetch('http://127.0.0.1:8000/api/insert-table', {
             method: 'POST', // Specify the method
             headers: {
@@ -40,6 +40,8 @@ const Form = () => {
                         type="file"
                         name='file'
                         accept=".txt"
+                        value={file}
+                        onChange={e => setFile(e.target.value)}
                     />
                     <label className="text-gray-700 text-xl font-bold mb-2 mt-8 flex flex-col items-center">
                         Add Separator
@@ -48,6 +50,8 @@ const Form = () => {
                         className=" border  mx-16 w-[85%] rounded-4xl py-2 px-6"
                         type="text"
                         name='delimiter'
+                        value={delimiter}
+                        onChange={e=> setDelimiter(e.target.value)}
                         placeholder="Please enter only the separator"
                     />
                 </div>
