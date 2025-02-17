@@ -2,20 +2,15 @@ import React, { useState, useEffect } from 'react';
 
 const Form = () => {
 
-    const [file, setFile] = useState(null);
-    const [delimiter, setDelimiter] = useState(null);
-    const [message, setMessage] = useState("");
+    const [file, setFile] = useState();
+    const [delimiter, setDelimiter] = useState();
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const data = { file, delimiter };
-<<<<<<< HEAD
-        console.log(delimiter);
-=======
 
-        console.log(data)
+        console.log(data.file)
 
->>>>>>> 5cbb6ba2c256bf08d86c954cf75b8e54a60a5751
         fetch('http://127.0.0.1:8000/api/insert-table', {
             method: 'POST', // Specify the method
             headers: {
@@ -47,8 +42,8 @@ const Form = () => {
                         type="file"
                         name='file'
                         accept=".txt"
-                        value={file}
-                        onChange={e => setFile(e.target.value)}
+                        // value={file}
+                        onChange={e => setFile(e.target.files[0])}
                     />
                     <label className="text-gray-700 text-xl font-bold mb-2 mt-8 flex flex-col items-center">
                         Add Separator
@@ -59,6 +54,7 @@ const Form = () => {
                         name='delimiter'
                         value={delimiter}
                         onChange={e=> setDelimiter(e.target.value)}
+                        
                         placeholder="Please enter only the separator"
                     />
                 </div>
