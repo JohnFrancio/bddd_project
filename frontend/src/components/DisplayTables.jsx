@@ -12,8 +12,6 @@ const DisplayTables = () => {
       );
   }, []);
 
-  console.log(message.length)
-
   return (
       <div>
         {message.map((el) => (
