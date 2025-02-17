@@ -1,4 +1,5 @@
 # Projet Django + React
+
 ## Prérequis
 
 Avant de commencer, assurez-vous d'avoir installé les outils suivants sur votre machine :
@@ -35,7 +36,7 @@ Déplacez-vous dans le dossier **`backend/`** et installez les dépendances néc
 
 ```bash
 cd ../backend/
-pip install djangorestframework django-cors-headers psycopg2-binary
+pip install djangorestframework django-cors-headers psycopg2-binary python-dotenv
 ```
 
 ### 4. Créer un fichier `.env`
