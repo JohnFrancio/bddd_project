@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import hello_world
+from .views import getAllTables
 
 urlpatterns = [
-    path('', hello_world),  # /api/ renverra "Hello, World!"
+    path('show-tables', getAllTables),  # /api/showtables renverra les tables
 ]
