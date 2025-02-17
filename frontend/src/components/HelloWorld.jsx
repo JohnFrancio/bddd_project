@@ -14,8 +14,7 @@ const HelloWorld = () => {
 
   return (
       <div>
-        <h2>Message du backend : 
-        <p className="text-red-600 animate-pulse">{message}</p></h2>
+        
       </div>
   );
 };
