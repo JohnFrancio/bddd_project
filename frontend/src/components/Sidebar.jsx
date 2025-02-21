@@ -1,33 +1,35 @@
-import { FcAddDatabase } from "react-icons/fc";
 import { FaHome, FaList } from "react-icons/fa";
+import { BsDatabaseAdd } from "react-icons/bs";
+import {NavLink} from "react-router-dom";
+
 const Sidebar = () => {
     return (
-        <div className="h-screen flex">
-            <nav className="w-55 h-full bg-gray-800 text-white">
-                <ul className="flex flex-col items-center w-full">
+        <div className="fixed top-0 left-0 w-64 h-full bg-gray-800 text-white">
+            <nav>
+                <ul className="flex flex-col items-center p-4">
                     <li className="my-2 w-full">
-                        <a href="#" className="flex items-center justify-start space-x-5 py-2 px-4 hover:bg-gray-700 rounded">
+                        <NavLink to="/" className="flex items-center justify-start space-x-5 py-2 px-4 hover:text rounded">
                             <FaHome />
                             <span>
                                 HOME
                             </span>
-                        </a>
+                        </NavLink>
                     </li>
                     <li className="my-2 w-full">
-                        <a href="#" className="flex items-center justify-start space-x-5 py-2 px-4 hover:bg-gray-700 rounded">
-                            <FcAddDatabase />
+                        <NavLink to="/insert" className="flex items-center justify-start space-x-5 py-2 px-4 hover:text rounded">
+                            <BsDatabaseAdd />
                             <span>
                                 INSERT
                             </span>
-                        </a>
+                        </NavLink>
                     </li>
                     <li className="my-2 w-full">
-                        <a href="#" className="flex items-center justify-start space-x-5 py-2 px-4 hover:bg-gray-700 rounded">
+                        <NavLink to="/list" className="flex items-center justify-start space-x-5 py-2 px-4 hover:text rounded">
                             <FaList />
                             <span>
                                 LIST
                             </span>
-                        </a>
+                        </NavLink>
                     </li>
                 </ul>
             </nav>
