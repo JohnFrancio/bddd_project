@@ -37,25 +37,10 @@ const Insert = () => {
             console.error('Erreur réseau:', error);
         }
 
-
-        // fetch('http://127.0.0.1:8000/api/insert-table', {
-        //     method: 'POST', // Specify the method
-        //     headers: {
-        //         'Content-Type': 'application/json', // Content type to be sent to the server
-        //     },
-        //     body: JSON.stringify(data), // Convert the data object to a JSON string
-        // })
-        //     .then(response => response.json()) // Parse the JSON response from the server
-        //     .then(result => {
-        //         console.log('Success:', result); // Handle the response
-        //     })
-        //     .catch(error => {
-        //         console.error('Error:', error); // Handle any errors
-        //     });
     }
 
     return (
-        <div className="h-screen flex flex-col items-center justify-center bg-teal-800">
+        <div className="h-screen flex flex-col items-center justify-center  bg-gradient-to-tr from-blue-900 to-cyan-700">
             <div className=" flex flex-col items-center bg-gray-300 rounded-2xl">
                 <h1 className=" font-bold text-teal-950 mb-10 mt-15">
                     INSERTION TABLE
@@ -89,7 +74,7 @@ const Insert = () => {
 
                     </div>
                     <div className=" flex flex-col items-center">
-                        <button className="  bg-emerald-950 text-white px-10 p-2 rounded-2xl hover:bg-emerald-800">
+                        <button className="  bg-blue-900 text-white px-10 p-2 rounded-2xl hover:bg-blue-800 cursor-pointer">
                             Continuer
                         </button>
                     </div>
