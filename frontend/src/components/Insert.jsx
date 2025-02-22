@@ -1,31 +1,58 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 
 const Insert = () => {
 
-    // const [file, setFile] = useState();
-    // const [delimiter, setDelimiter] = useState();
+    const [file, setFile] = useState();
+    const [delimiter, setDelimiter] = useState();
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     const data = { file, delimiter };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    //     console.log(data.file)
+        if (!file || !delimiter) {
+            alert('Veuillez sélectionner un fichier et un séparateur');
+            return;
+        }
 
-    //     fetch('http://127.0.0.1:8000/api/insert-table', {
-    //         method: 'POST', // Specify the method
-    //         headers: {
-    //             'Content-Type': 'application/json', // Content type to be sent to the server
-    //         },
-    //         body: JSON.stringify(data), // Convert the data object to a JSON string
-    //     })
-    //         .then(response => response.json()) // Parse the JSON response from the server
-    //         .then(result => {
-    //             console.log('Success:', result); // Handle the response
-    //         })
-    //         .catch(error => {
-    //             console.error('Error:', error); // Handle any errors
-    //         });
-    // }
+        const data = { file, delimiter };
+
+        console.log(data)
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('delimiter', delimiter);
+
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/insert-table', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                const data = await response.json();  // Si la réponse est en JSON
+                console.log('Réponse du serveur:', data);
+            } else {
+                console.error('Erreur lors de l\'envoi:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Erreur réseau:', error);
+        }
+
+
+        // fetch('http://127.0.0.1:8000/api/insert-table', {
+        //     method: 'POST', // Specify the method
+        //     headers: {
+        //         'Content-Type': 'application/json', // Content type to be sent to the server
+        //     },
+        //     body: JSON.stringify(data), // Convert the data object to a JSON string
+        // })
+        //     .then(response => response.json()) // Parse the JSON response from the server
+        //     .then(result => {
+        //         console.log('Success:', result); // Handle the response
+        //     })
+        //     .catch(error => {
+        //         console.error('Error:', error); // Handle any errors
+        //     });
+    }
 
     return (
         <div className="h-screen flex flex-col items-center justify-center bg-teal-800">
@@ -33,21 +60,38 @@ const Insert = () => {
                 <h1 className=" font-bold text-teal-950 mb-10 mt-15">
                     INSERTION TABLE
                 </h1>
-                <form className=" flex flex-col items-center ml-15 mr-15 mb-15">
+                <form onSubmit={handleSubmit} encType="multipart/form-data" className=" flex flex-col items-center ml-15 mr-15 mb-15">
                     <div className="flex flex-col">
                         <input
                             type="file"
                             className="bg-white rounded-3xl mb-5 px-10 p-3"
-                            
+                            name="file"
+                            accept=".txt"
+                            onChange={e => setFile(e.target.files[0])}
+
                         />
                         <input
+                            list="delimiterList"
                             type="text"
                             placeholder="Add Separator"
                             className="bg-white rounded-3xl mb-5 px-10 p-3"
+                            name='delimiter'
+                            // value={delimiter}
+                            onChange={e => setDelimiter(e.target.value)}
                         />
+                        <datalist id="delimiterList">
+                            <option value="'"></option>
+                            <option value=","></option>
+                            <option value='"'></option>
+                            <option value="|"></option>
+                            <option value="#"></option>
+                        </datalist>
+
                     </div>
-                    <div className="border border-purple-800 bg-emerald-950 text-white px-10 p-2 rounded-2xl">
-                        <button>Continuer</button>
+                    <div className=" flex flex-col items-center">
+                        <button className="  bg-emerald-950 text-white px-10 p-2 rounded-2xl hover:bg-emerald-800">
+                            Continuer
+                        </button>
                     </div>
                 </form>
             </div>
