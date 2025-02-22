@@ -19,11 +19,15 @@ def upload_file_endpoint(request):
 
     # Le nom de la table est tiré du nom du fichier, en minuscules (sans extension)
     table_name = os.path.splitext(file_obj.name)[0].lower()
-
+    
     try:
         # Lire le contenu du fichier en mémoire et utiliser csv.reader
         decoded_file = file_obj.read().decode('utf-8').splitlines()
-        reader = csv.reader(decoded_file, delimiter=delimiter)
+        # Si le délimiteur est le double quote, changer le quotechar pour éviter le conflit
+        if delimiter == '"':
+            reader = csv.reader(decoded_file, delimiter=delimiter, quotechar="'")
+        else:
+            reader = csv.reader(decoded_file, delimiter=delimiter)
     except Exception as e:
         return JsonResponse({'error': f'Erreur lors de la lecture du fichier: {str(e)}'}, status=400)
 
