@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const DisplayTables = () => {
   const [message, setMessage] = useState([]);
@@ -13,13 +13,13 @@ const DisplayTables = () => {
   }, []);
 
   return (
-      <div>
-        {message.map((el) => (
-          <p>
-            {el}
-          </p>
-        ))}
-      </div>
+    <div>
+      {message.map((el) => (
+        <p>
+          {el}
+        </p>
+      ))}
+    </div>
   );
 };
 

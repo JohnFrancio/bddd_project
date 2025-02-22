@@ -1,19 +1,23 @@
-import React from "react";
-import Form from "./components/Form.jsx";
-import DisplayTables from "./components/DisplayTables.jsx"
-import Header from "./components/Header.jsx";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Sidebar from "./components/Sidebar.jsx";
+import Home from "./components/Home.jsx";
+import Insert from "./components/Insert.jsx";
+import List from "./components/List.jsx";
 
 function App() {
     return (
-            <div>
-                <Header />
-                <div>
-                    <main className="flex-1 p-6">                   
-                        <Form />
-                    </main>
-                    <DisplayTables />
+        <Router>
+            <div className="flex h-screen">
+                <Sidebar />
+                <div className="flex-1 pl-64">
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="insert" element={<Insert />} />
+                        <Route path="list" element={<List />} />
+                    </Routes>
                 </div>
             </div>
+        </Router>
     );
 }
 
