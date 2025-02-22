@@ -13,6 +13,13 @@ def getAllTables(request):
 
     for table in tables: 
         if table[0] not in exept:
-            tableToDisplay.append(table[0])
+            with connection.cursor() as count_cursor:
+                # Utilisation de guillemets doubles pour encapsuler le nom de la table
+                count_cursor.execute(f'SELECT COUNT(*) FROM "{table[0]}"')
+                row_count = count_cursor.fetchone()[0]
+
+            tableToDisplay.append({"table":table[0],
+                                   "nombre_ligne": row_count})
+            
 
     return JsonResponse({"tables": tableToDisplay})
