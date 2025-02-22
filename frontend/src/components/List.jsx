@@ -1,7 +1,6 @@
 // import db from "../assets/db.png";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import Card from "./Card";
 
 const List = () => {
@@ -20,7 +19,8 @@ const List = () => {
           throw new Error('Network response was not ok');
         }
         const result = await response.json();
-        setData(result);
+        console.log(result);
+        setData(result.tables);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -34,13 +34,6 @@ const List = () => {
   // Create extended data array for infinite loop
   const extendedData = data.length > 0 ? [...data, { ...data[0], id: data[0].id + Date.now() }] : [];
 
-  const nextSlide = () => {
-    setIndex((prev) => (prev + 1) % extendedData.length);
-  };
-
-  const prevSlide = () => {
-    setIndex((prev) => (prev - 1 + extendedData.length) % extendedData.length);
-  };
 
   // Reset index when reaching the cloned item
   useEffect(() => {
@@ -82,31 +75,18 @@ const List = () => {
 
       {data.length > 0 ? (
         <div className="overflow-hidden mt-5 max-w-4xl">
-          <motion.div
-            className="flex gap-6"
-            animate={{ x: `-${index * 65}%` }}
-            transition={{ type: "spring", stiffness: 100 }}
-          >
-            {extendedData.map((item, idx) => (
-              <motion.div
-                key={`${item.id}-${idx}`}
-              >
-                <Card
-                  title={item.name}
-                  content={truncateText(item.content, 50) || "No description available"}
-                />
-              </motion.div>
-            ))}
-          </motion.div>
-          {/* Boutons de navigation */}
-          <div className="absolute bottom-20 right-120 flex gap-16">
-            <button onClick={prevSlide} className="p-2 bg-black/40 rounded-full">
-              <FaChevronLeft size={24} className="text-white" />
-            </button>
-            <button onClick={nextSlide} className="p-2 bg-black/40 rounded-full">
-              <FaChevronRight size={24} className="text-white" />
-            </button>
-          </div>
+
+          {extendedData.map((item, idx) => (
+            <div
+              key={`${item.table}-${idx}`}
+            >
+              <Card
+                title={item.table}
+                content={truncateText(item.nombre_ligne, 50) || "No description available"}
+              />
+            </div>
+          ))}
+
         </div>
       ) : (
         <div className="mt-8 text-white text-lg">No tables found in the database</div>
