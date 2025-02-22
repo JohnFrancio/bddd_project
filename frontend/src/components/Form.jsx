@@ -2,20 +2,13 @@ import React, { useState, useEffect } from 'react';
 
 const Form = () => {
 
-    const [file, setFile] = useState(null);
+    const [file, setFile] = useState();
     const [delimiter, setDelimiter] = useState(null);
-    const [message, setMessage] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = { file, delimiter };
-<<<<<<< HEAD
-        console.log(delimiter);
-=======
-
-        console.log(data)
-
->>>>>>> 5cbb6ba2c256bf08d86c954cf75b8e54a60a5751
+        console.log(data);
         fetch('http://127.0.0.1:8000/api/insert-table', {
             method: 'POST', // Specify the method
             headers: {
@@ -37,7 +30,7 @@ const Form = () => {
             <div className="flex flex-col items-center">
                 <h2 className="text-2xl text-black font-bold">Upload Data</h2>
             </div>
-            <form className="m-auto shadow-gray-600" onSubmit={handleSubmit}>
+            <form className="m-auto shadow-gray-600" onSubmit={handleSubmit} encType='multipart/form-data'>
                 <div className="my-16 ">
                     <label className="text-gray-700 text-xl font-bold mb-2 mt-5 flex flex-col items-center">
                         Add File here
@@ -48,7 +41,7 @@ const Form = () => {
                         name='file'
                         accept=".txt"
                         value={file}
-                        onChange={e => setFile(e.target.value)}
+                        onChange={handleFile}
                     />
                     <label className="text-gray-700 text-xl font-bold mb-2 mt-8 flex flex-col items-center">
                         Add Separator
@@ -58,7 +51,7 @@ const Form = () => {
                         type="text"
                         name='delimiter'
                         value={delimiter}
-                        onChange={e=> setDelimiter(e.target.value)}
+                        onChange={e => setDelimiter(e.target.value)}
                         placeholder="Please enter only the separator"
                     />
                 </div>
