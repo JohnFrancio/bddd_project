@@ -3,35 +3,44 @@ import PropTypes from "prop-types";
 
 import { IoClose } from "react-icons/io5";
 import { FaEdit, FaCalculator } from "react-icons/fa";
+import { useState } from "react";
+import Modal from "./Modal";
 
 
 const Card = (
     { title, content, image }
 ) => {
-    return (
-        <div className="relative w-70 h-100 bg-gray-800 p-6 rounded-2xl shadow-xl flex flex-col items-center text-white">
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-            <button className="absolute top-2 right-2 text-gray-400 hover:text-white">
+    const handleDeleteConfirmation = () => {
+        setIsModalOpen(false);
+        // Add your actual delete logic here
+        console.log('Deleting table:', title);
+    };
+
+    return (
+        <div className="relative w-70 h-100 bg-gray-800 rounded-2xl shadow-xl flex flex-col items-center text-white">
+
+            <button
+                className="absolute top-2 right-2 text-gray-400 hover:text-red-600"
+                onClick={() => setIsModalOpen(true)}
+            >
                 <IoClose size={25} />
             </button>
 
-            <div className="w-70 h-75 bg-white flex items-center justify-center rounded-md">
+            <div className="w-70 h-75 bg-slate-600 flex items-center justify-center rounded-md">
                 <img
                     src={image || db}
                     alt="Database"
                     className="w-24 h-24"
                 />
             </div>
-
-
             <h2 className="mt-2 text-lg font-semibold">
                 Table : {title}
             </h2>
             <p className="text-gray-400">
                 Contient : {content} lignes
             </p>
-
-
             <div className="mt-2 flex gap-4">
                 <button className="px-4 py-2 rounded hover:bg-gray-700">
                     <FaEdit size={25} />
@@ -40,6 +49,15 @@ const Card = (
                     <FaCalculator size={25} />
                 </button>
             </div>
+
+
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onConfirm={handleDeleteConfirmation}
+                title={title}
+            />
+            
         </div>
 
     )
