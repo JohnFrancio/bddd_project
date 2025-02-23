@@ -24,7 +24,7 @@ const Insert = () => {
         try {
             const response = await fetch('http://127.0.0.1:8000/api/insert-table', {
                 method: 'POST',
-                body: formData, 
+                body: formData,
             });
 
             if (response.ok) {
@@ -40,7 +40,7 @@ const Insert = () => {
     }
 
     return (
-        <div className="h-screen flex flex-col items-center justify-center  bg-gradient-to-tr from-blue-900 to-cyan-700">
+        <div className="h-screen flex flex-col items-center justify-center  bg-gradient-to-tr from-[#203139] to-[#438FB2]">
             <div className=" flex flex-col items-center bg-gray-300 rounded-2xl">
                 <h1 className=" font-bold text-teal-950 mb-10 mt-15">
                     INSERTION TABLE

@@ -4,7 +4,7 @@ const Home = () => {
 
 
   return (
-    <div className="flex flex-col items-center h-screen bg-gradient-to-tr from-blue-900 to-cyan-700">
+    <div className="flex flex-col items-center h-screen bg-gradient-to-tr from-[#203139] to-[#438FB2]">
       <div className="mt-12">
         <h1 className="font-bold text-white text-4xl">Gestion BD</h1>
       </div>
