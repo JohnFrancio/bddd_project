@@ -11,7 +11,7 @@ const Sidebar = () => {
                         <NavLink to="/" className="flex items-center justify-start space-x-5 py-2 px-4 hover:text rounded">
                             <FaHome />
                             <span>
-                                HOME
+                                ACCEUIL
                             </span>
                         </NavLink>
                     </li>
@@ -19,7 +19,7 @@ const Sidebar = () => {
                         <NavLink to="/insert" className="flex items-center justify-start space-x-5 py-2 px-4 hover:text rounded">
                             <BsDatabaseAdd />
                             <span>
-                                INSERT
+                                INSERTION
                             </span>
                         </NavLink>
                     </li>
@@ -27,7 +27,7 @@ const Sidebar = () => {
                         <NavLink to="/list" className="flex items-center justify-start space-x-5 py-2 px-4 hover:text rounded">
                             <FaList />
                             <span>
-                                LIST
+                                LISTES TABLES
                             </span>
                         </NavLink>
                     </li>

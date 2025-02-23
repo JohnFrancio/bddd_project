@@ -55,19 +55,19 @@ const List = () => {
 
 
   return (
-    <div className=" h-full flex flex-col items-center  bg-gradient-to-tr from-[#203139] to-[#438FB2]">
+    <div className=" h-fit flex flex-col items-center  bg-gradient-to-tr from-[#203139] to-[#438FB2]">
       <div className="mt-12">
         <h1 className="font-bold text-white text-4xl">Listes Tables</h1>
       </div>
 
       {data.length > 0 ? (
-        <div className=" w-full border border-blue-300">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="w-full p-5 pl-15 mt-5">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 md:grid-cols-2">
             {data.map((item) => (
               <Card
                 key={item.table}
-                title={`Nom de la table : "${item.table}"`}
-                content={`Contient ${item.nombre_ligne} lignes`}
+                title={item.table}
+                content={item.nombre_ligne}
               />
             ))}
           </div>
