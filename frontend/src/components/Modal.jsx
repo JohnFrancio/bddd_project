@@ -9,7 +9,7 @@ function Modal({ isOpen, onClose, onConfirm, title }) {
             onClick={onClose}
         >
             <div
-                className="bg-red-400 p-6 rounded-lg shadow-lg max-w-sm w-full"
+                className="bg-[#1E40AF] p-6 rounded-lg shadow-lg max-w-sm w-full"
                 onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
             >
                 <h2 className="text-xl font-bold text-center">Confirmation de suppression de table</h2>
