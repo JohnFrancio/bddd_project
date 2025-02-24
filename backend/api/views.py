@@ -20,6 +20,27 @@ def getAllTables(request):
 
             tableToDisplay.append({"table":table[0],
                                    "nombre_ligne": row_count})
-            
-
     return JsonResponse({"tables": tableToDisplay})
+          
+def getTableDetails(request):
+    table_name = "b"  # Remplace par le nom réel de ta table
+
+    with connection.cursor() as cursor:
+        # Récupérer les colonnes
+        cursor.execute(f"SELECT column_name FROM information_schema.columns WHERE table_name = '{table_name}';")
+        columns = [col[0] for col in cursor.fetchall()]
+
+        # Récupérer toutes les lignes de la table
+        cursor.execute(f"SELECT * FROM {table_name};")
+        rows = cursor.fetchall()
+
+    # Afficher les données avec les colonnes
+    data = [columns] + rows
+    cleaned_data = [data[0]] + [
+    tuple(value.replace("\t", "") if isinstance(value, str) else value for value in row)
+    for row in data[1:]
+    ]
+
+    # Affichage du résultat propre
+    print(cleaned_data)  
+    return JsonResponse({"details": cleaned_data})
