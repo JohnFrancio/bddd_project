@@ -27,9 +27,9 @@ function TableDetails() {
     }, [table]);
     if (isLoading) {
         return (
-            <div className=" flex items-center justify-center bg-gradient-to-tr from-[#203139] to-[#438FB2]">
+            <div className=" min-h-screen flex items-center justify-center bg-gradient-to-tr from-[#203139] to-[#438FB2]">
                 <div className="mt-12">
-                    <h1 className="font-bold text-white text-4xl">Details Table : &quot;{table}&quot;</h1>
+                    <h1 className="font-bold text-white text-4xl">Details / Requetes</h1>
                     <div className="text-white font-bold text-xl mt-32 border bg-green-700 p-6 rounded-2xl">Chargements des tables...</div>
                 </div>
             </div>
@@ -38,9 +38,9 @@ function TableDetails() {
 
     if (error) {
         return (
-            <div className=" flex flex-col items-center  bg-gradient-to-tr from-[#203139] to-[#438FB2]">
+            <div className=" min-h-screen flex flex-col items-center  bg-gradient-to-tr from-[#203139] to-[#438FB2]">
                 <div className="mt-12">
-                    <h1 className="font-bold text-white text-4xl">Details Table : &quot;{table}&quot;</h1>
+                    <h1 className="font-bold text-white text-4xl">Details / Requetes</h1>
                     <div className="text-white font-bold text-xl mt-32 border bg-red-800 p-6 rounded-2xl">Erreur: {error}</div>
                 </div>
             </div>
@@ -50,9 +50,9 @@ function TableDetails() {
     const headers = data.length > 0 ? data[0] : [];
     const rows = data.length > 0 ? data.slice(1) : [];
     return (
-        <div className=" flex flex-col items-center  bg-gradient-to-tr from-[#203139] to-[#438FB2]">
+        <div className="min-h-screen flex flex-col items-center  bg-gradient-to-tr from-[#203139] to-[#438FB2]">
             <div className="mt-10">
-                <h1 className="font-bold text-white text-4xl">Details Table : &quot;{table}&quot;</h1>
+                <h1 className="font-bold text-white text-4xl">Details / Requetes</h1>
             </div>
             <div className="w-full grid grid-cols-5 gap-4 mt-5 ">
                 <div className="w-full col-span-3 bg-white p-2 rounded-lg">
