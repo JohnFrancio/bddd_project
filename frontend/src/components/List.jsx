@@ -10,7 +10,7 @@ const List = () => {
 
   const handleDeleteTable = async (tableName) => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/table-delete/${tableName}`, {
+      const response = await fetch(`http://127.0.0.1:8000/api/delete-table/${tableName}/`, {
         method: 'DELETE'
       });
 
@@ -28,7 +28,7 @@ const List = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/show-tables");
+        const response = await fetch("http://127.0.0.1:8000/api/show-tables/");
         if (!response.ok) throw new Error('Network response was not ok');
 
         const result = await response.json();
