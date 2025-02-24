@@ -8,21 +8,6 @@ const List = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const handleDeleteTable = async (tableName) => {
-    try {
-      const response = await fetch(`http://127.0.0.1:8000/api/delete-table/${tableName}/`, {
-        method: 'DELETE'
-      });
-
-      if (!response.ok) throw new Error('Delete failed');
-
-      // Refresh the table list
-      const result = await response.json();
-      setData(result.tables.filter(table => table.table !== tableName));
-    } catch (error) {
-      setError(error.message);
-    }
-  };
 
   // Fetch data from API
   useEffect(() => {
@@ -84,7 +69,7 @@ const List = () => {
                 key={item.table}
                 title={item.table}
                 content={item.nombre_ligne}
-                onDelete={() => handleDeleteTable(item.table)}
+                // onDelete={item.table}
               />
             ))}
           </div>

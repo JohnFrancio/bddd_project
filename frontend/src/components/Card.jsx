@@ -6,14 +6,27 @@ import { FaEdit, FaCalculator } from "react-icons/fa";
 import { useState } from "react";
 import Modal from "./Modal";
 
-
 const Card = (
     { title, content, image }
 ) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleDeleteConfirmation = () => {
+    const handleEdit = () => {
+        console.log("hello");
+    }
+
+    const handleDeleteConfirmation = async () => {
         setIsModalOpen(false);
+        console.log(title);
+        try {
+            const reponse = await fetch(`http://127.0.0.1:8000/api/table-delete/${title}/`, {
+                method: 'DELETE'
+            });
+            if (!reponse.ok) throw new Error('Delete failed');
+        } catch (error) {
+            console.log(error.message);
+        }
+
         // Add your actual delete logic here
         console.log('Deleting table:', title);
     };
@@ -43,7 +56,7 @@ const Card = (
                 Contient : {content} lignes
             </p>
             <div className="mt-2 mb-3 flex gap-6">
-                <button className="px-6 py-2 rounded hover:bg-gray-700">
+                <button className="px-6 py-2 rounded hover:bg-gray-700" onClick={handleEdit}>
                     <FaEdit size={25} />
                 </button>
                 <button className="px-6 py-2 rounded hover:bg-gray-700">
