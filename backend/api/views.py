@@ -1,6 +1,7 @@
 import os
 import csv
 import re
+import json
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -144,3 +145,45 @@ def delete_table(request, table_name):
     
     return JsonResponse({"message": f"Table '{table_name}' supprimée avec succès."})
 
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.db import connection
+
+@csrf_exempt
+def execute_query(request):
+    if request.method == "POST":
+        try:
+            # Afficher ce que Django reçoit avant de tenter de décoder
+            raw_body = request.body.decode("utf-8")
+            print("Requête brute reçue :", raw_body)  # Debug
+
+            if not raw_body:
+                return JsonResponse({"error": "Le corps de la requête est vide"}, status=400)
+
+            # Tenter de parser le JSON
+            body = json.loads(raw_body)
+            sql_query = body.get("query", "").strip()
+
+            if not sql_query:
+                return JsonResponse({"error": "Aucune requête fournie"}, status=400)
+
+            with connection.cursor() as cursor:
+                cursor.execute(sql_query)
+
+                if sql_query.upper().startswith("SELECT"):
+                    result = cursor.fetchall()
+                    columns = [desc[0] for desc in cursor.description]
+                    data = [columns] + result
+                else:
+                    data = {"message": "Requête exécutée avec succès"}
+
+            return JsonResponse({"result": data})
+
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Format JSON invalide"}, status=400)
+
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+
+    return JsonResponse({"error": "Méthode non autorisée"}, status=405)
