@@ -22,12 +22,11 @@ def getAllTables(request):
                                    "nombre_ligne": row_count})
     return JsonResponse({"tables": tableToDisplay})
           
-def getTableDetails(request):
-    table_name = "b"  # Remplace par le nom réel de ta table
+def getTableDetails(request, table_name):
 
     with connection.cursor() as cursor:
         # Récupérer les colonnes
-        cursor.execute(f"SELECT column_name FROM information_schema.columns WHERE table_name = '{table_name}';")
+        cursor.execute(f"SELECT column_name FROM information_schema.columns WHERE table_name = %s;", [table_name])
         columns = [col[0] for col in cursor.fetchall()]
 
         # Récupérer toutes les lignes de la table
