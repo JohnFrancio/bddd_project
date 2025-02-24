@@ -40,7 +40,11 @@ const Sidebar = () => {
                         <li className="my-2 w-full">
                             <NavLink
                                 to="/"
-                                className="flex items-center justify-start space-x-5 py-2 px-4 hover:bg-gray-700 rounded transition-colors"
+                                // className="flex items-center justify-start space-x-5 py-2 px-4 hover:bg-gray-700 rounded transition-colors"
+                                className={({ isActive }) =>
+                                    `flex items-center justify-start space-x-5 py-2 px-4 rounded transition-colors relative ${isActive ? 'after:absolute after:content-[""] after:w-8 after:h-[2px] after:bg-white after:bottom-0 after:left-18' : 'hover:bg-gray-700'
+                                    }`
+                                }
                                 onClick={() => setIsOpen(false)}
                             >
                                 <FaHome className="text-xl" />
@@ -52,7 +56,11 @@ const Sidebar = () => {
                         <li className="my-2 w-full">
                             <NavLink
                                 to="/insert"
-                                className="flex items-center justify-start space-x-5 py-2 px-4 hover:bg-gray-700 rounded transition-colors"
+                                // className="flex items-center justify-start space-x-5 py-2 px-4 hover:bg-gray-700 rounded transition-colors"
+                                className={({ isActive }) =>
+                                    `flex items-center justify-start space-x-5 py-2 px-4 rounded transition-colors relative ${isActive ? 'after:absolute after:content-[""] after:w-8 after:h-[2px] after:bg-white after:bottom-0 after:left-19' : 'hover:bg-gray-700'
+                                    }`
+                                }
                                 onClick={() => setIsOpen(false)}
                             >
                                 <BsDatabaseAdd className="text-xl" />
@@ -62,7 +70,11 @@ const Sidebar = () => {
                         <li className="my-2 w-full">
                             <NavLink
                                 to="/list"
-                                className="flex items-center justify-start space-x-5 py-2 px-4 hover:bg-gray-700 rounded transition-colors"
+                                // className="flex items-center justify-start space-x-5 py-2 px-4 hover:bg-gray-700 rounded transition-colors"
+                                className={({ isActive }) =>
+                                    `flex items-center justify-start space-x-5 py-2 px-4 rounded transition-colors relative ${isActive ? 'after:absolute after:content-[""] after:w-8 after:h-[2px] after:bg-white after:bottom-0 after:left-23' : 'hover:bg-gray-700'
+                                    }`
+                                }
                                 onClick={() => setIsOpen(false)}
                             >
                                 <FaList className="text-xl" />
