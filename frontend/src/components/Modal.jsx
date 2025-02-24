@@ -5,7 +5,7 @@ function Modal({ isOpen, onClose, onConfirm, title }) {
 
     return (
         <div
-            className="fixed inset-0 bg-transparent bg-opacity-50 flex items-center justify-center"
+            className="fixed left-[600px] top-[150px] z-50 h-75 w-100 inset-0 bg-opacity-50  flex items-center justify-center"
             onClick={onClose}
         >
             <div

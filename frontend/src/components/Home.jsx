@@ -39,7 +39,7 @@ const Home = () => {
       </div>
       <div className="w-full max-w-4xl mb-8 md:mb-12">
         <p className="text-white text-sm md:text-base lg:text-lg text-center leading-relaxed md:leading-loose">
-          C&apos;est une application qui permet aux utilisateurs de gérer une base de données relationnelle de manière intuitive et sécurisée. Elle offre une interface utilisateur conviviale pour interagir avec les données sans nécessiter de connaissances avancées en SQL. Une application de gestion de base de données est un logiciel permettant de stocker, organiser, manipuler et sécuriser des données de manière structurée. Elle permet d&apos;effectuer des opérations.
+          C&apos;est une application qui permet aux utilisateurs de gérer une base de données relationnelle de manière intuitive et sécurisée. Elle offre une interface utilisateur conviviale pour interagir avec les données sans nécessiter de connaissances avancées en SQL. <br /> Une application de gestion de base de données est un logiciel permettant de stocker, organiser, manipuler et sécuriser des données de manière structurée. Elle permet d&apos;effectuer des opérations.
         </p>
       </div>
 

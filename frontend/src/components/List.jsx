@@ -47,10 +47,10 @@ const List = () => {
 
   if (isLoading) {
     return (
-      <div className="h-screen flex items-center justify-center bg-gradient-to-tr from-blue-900 to-cyan-700">
+      <div className="h-screen flex items-center justify-center bg-gradient-to-tr from-[#203139] to-[#438FB2]">
         <div className="mt-12">
           <h1 className="font-bold text-white text-4xl">Listes Tables</h1>
-          <div className="text-white font-bold text-xl mt-32 border bg-green-700 p-6 rounded-2xl">Loading tables...</div>
+          <div className="text-white font-bold text-xl mt-32 border bg-green-700 p-6 rounded-2xl">Chargements des tables...</div>
         </div>
       </div>
     );
@@ -58,10 +58,10 @@ const List = () => {
 
   if (error) {
     return (
-      <div className="h-screen flex flex-col items-center  bg-gradient-to-tr from-blue-900 to-cyan-700">
+      <div className="h-screen flex flex-col items-center  bg-gradient-to-tr from-[#203139] to-[#438FB2]">
         <div className="mt-12">
           <h1 className="font-bold text-white text-4xl">Listes Tables</h1>
-          <div className="text-white font-bold text-xl mt-32 border bg-red-800 p-6 rounded-2xl">Error: {error}</div>
+          <div className="text-white font-bold text-xl mt-32 border bg-red-800 p-6 rounded-2xl">Erreur: {error}</div>
         </div>
       </div>
     );
@@ -91,7 +91,7 @@ const List = () => {
         </div>
       ) : (
         <div className="mt-8 text-white text-lg">
-          No tables found in the database
+          La base de données ne contient pas de tables.
         </div>
       )}
 

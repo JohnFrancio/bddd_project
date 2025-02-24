@@ -19,6 +19,7 @@ const Card = (
     };
 
     return (
+
         <div className="relative w-70 h-100 bg-gray-800 rounded-2xl shadow-xl flex flex-col items-center text-white">
 
             <button
@@ -41,14 +42,16 @@ const Card = (
             <p className="text-gray-400">
                 Contient : {content} lignes
             </p>
-            <div className="mt-2 flex gap-4">
-                <button className="px-4 py-2 rounded hover:bg-gray-700">
+            <div className="mt-2 mb-3 flex gap-6">
+                <button className="px-6 py-2 rounded hover:bg-gray-700">
                     <FaEdit size={25} />
                 </button>
-                <button className="px-4 py-2 rounded hover:bg-gray-700">
+                <button className="px-6 py-2 rounded hover:bg-gray-700">
                     <FaCalculator size={25} />
                 </button>
             </div>
+
+
 
 
             <Modal
@@ -57,7 +60,7 @@ const Card = (
                 onConfirm={handleDeleteConfirmation}
                 title={title}
             />
-            
+
         </div>
 
     )
