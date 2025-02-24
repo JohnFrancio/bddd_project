@@ -10,7 +10,7 @@ const List = () => {
 
   const handleDeleteTable = async (tableName) => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/delete-table/${tableName}`, {
+      const response = await fetch(`http://127.0.0.1:8000/api/table-delete/${tableName}`, {
         method: 'DELETE'
       });
 
