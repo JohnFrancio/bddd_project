@@ -1,3 +1,11 @@
+// try {
+//     const reponse = fetch(`http://127.0.0.1:8000/api/table-details/${title}/`, {
+//         method: 'GET'
+//     });
+//     if (!response.ok) throw new Error('Network response was not ok');
+//     const result = await response.json();
+//     console.log(result);
+// }
 import db from "../assets/db.png";
 import PropTypes from "prop-types";
 
@@ -6,13 +14,18 @@ import { FaEdit, FaCalculator } from "react-icons/fa";
 import { useState } from "react";
 import Modal from "./Modal";
 
+import { useNavigate } from "react-router-dom";
+
+
 const Card = (
     { title, content, image }
 ) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigate();
 
-    const handleEdit = () => {
-        console.log("hello");
+    const handleDetails = async () => {
+        console.log(`Fetching details for table: ${title}`);
+        navigate(`/list/table/${title}`);
     }
 
     const handleDeleteConfirmation = async () => {
@@ -56,7 +69,7 @@ const Card = (
                 Contient : {content} lignes
             </p>
             <div className="mt-2 mb-3 flex gap-6">
-                <button className="px-6 py-2 rounded hover:bg-gray-700" onClick={handleEdit}>
+                <button className="px-6 py-2 rounded hover:bg-gray-700" onClick={handleDetails}>
                     <FaEdit size={25} />
                 </button>
                 <button className="px-6 py-2 rounded hover:bg-gray-700">

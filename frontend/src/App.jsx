@@ -3,6 +3,7 @@ import Sidebar from "./components/Sidebar.jsx";
 import Home from "./components/Home.jsx";
 import Insert from "./components/Insert.jsx";
 import List from "./components/List.jsx";
+import TableDetails from "./components/TableDetails.jsx";
 
 function App() {
     return (
@@ -14,6 +15,8 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="insert" element={<Insert />} />
                         <Route path="list" element={<List />} />
+                        <Route path="list/table/:table" element={<TableDetails />} />
+
                     </Routes>
                 </div>
             </div>
