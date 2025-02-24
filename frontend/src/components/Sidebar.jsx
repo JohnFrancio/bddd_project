@@ -12,7 +12,7 @@ const Sidebar = () => {
             {/* Mobile Menu Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-gray-800 text-white hover:bg-gray-700 transition-colors"
+                className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-gray-800 text-white hover:bg-gray-700 transition-colors "
             >
                 <svg
                     className="w-6 h-6"
@@ -44,7 +44,9 @@ const Sidebar = () => {
                                 onClick={() => setIsOpen(false)}
                             >
                                 <FaHome className="text-xl" />
-                                <span>ACCEUIL</span>
+                                <span>
+                                    ACCEUIL
+                                </span>
                             </NavLink>
                         </li>
                         <li className="my-2 w-full">

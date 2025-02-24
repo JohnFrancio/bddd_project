@@ -71,7 +71,7 @@ const List = () => {
 
 
   return (
-    <div className=" h-fit flex flex-col items-center  bg-gradient-to-tr from-[#203139] to-[#438FB2]">
+    <div className=" h-auto flex flex-col items-center  bg-gradient-to-tr from-[#203139] to-[#438FB2]">
       <div className="mt-12">
         <h1 className="font-bold text-white text-4xl">Listes Tables</h1>
       </div>
