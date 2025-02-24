@@ -22,7 +22,7 @@ const Insert = () => {
         formData.append('delimiter', delimiter);
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/insert-table', {
+            const response = await fetch('http://127.0.0.1:8000/api/insert-table/', {
                 method: 'POST',
                 body: formData,
             });
