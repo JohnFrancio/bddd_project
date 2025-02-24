@@ -118,7 +118,7 @@ def getTableDetails(request, table_name):
 
 @csrf_exempt
 def delete_table(request, table_name):
-    if request.method != "POST":
+    if request.method != "DELETE":
         return JsonResponse({"error": "Méthode non autorisée. Utilisez POST."}, status=405)
     
     # Liste des tables à ne pas supprimer
