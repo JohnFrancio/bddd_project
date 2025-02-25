@@ -25,7 +25,7 @@ const Insert = () => {
             });
 
             if (response.ok) {
-                setNotification({ message: 'Insertion réussie ! 🎉', type: 'success' });
+                setNotification({ message: 'Insertion réussie !', type: 'success' });
             } else {
                 setNotification({ message: `Échec de l'insertion : ${response.statusText}`, type: 'error' });
             }
