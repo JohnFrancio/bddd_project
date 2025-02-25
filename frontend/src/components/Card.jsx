@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const Card = (
-    { title, content, image }
+    { title, content, image, onDelete }
 ) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate();
@@ -30,18 +30,18 @@ const Card = (
 
     const handleDeleteConfirmation = async () => {
         setIsModalOpen(false);
-        console.log(title);
         try {
             const reponse = await fetch(`http://127.0.0.1:8000/api/table-delete/${title}/`, {
                 method: 'DELETE'
             });
             if (!reponse.ok) throw new Error('Delete failed');
+
+            alert(`Deleting table : ${title}`);
+            onDelete(title);
+
         } catch (error) {
             console.log(error.message);
         }
-
-        // Add your actual delete logic here
-        console.log('Deleting table:', title);
     };
 
     return (
@@ -77,9 +77,6 @@ const Card = (
                 </button>
             </div>
 
-
-
-
             <Modal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
@@ -96,6 +93,7 @@ Card.propTypes = {
     title: PropTypes.string.isRequired,   // title doit être une string et obligatoire
     content: PropTypes.string.isRequired, // content doit être une string et obligatoire
     image: PropTypes.string,              // image est une string mais optionnelle
+    onDelete: PropTypes.func.isRequired,
 };
 
 

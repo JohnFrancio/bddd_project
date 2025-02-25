@@ -1,5 +1,3 @@
-// import db from "../assets/db.png";
-
 import { useState, useEffect } from "react";
 import Card from "./Card";
 
@@ -9,12 +7,17 @@ const List = () => {
   const [error, setError] = useState(null);
 
 
+  const handleDelete = (deletedTable) => {
+    setData((prevData) => prevData.filter((table) => table.table !== deletedTable));
+  };
+
+
   // Fetch data from API
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("http://127.0.0.1:8000/api/show-tables/");
-        if (!response.ok) throw new Error('Network response was not ok');
+        if (!response.ok) throw new Error("Network response was not ok");
 
         const result = await response.json();
         setData(result.tables || []);
@@ -28,14 +31,12 @@ const List = () => {
     fetchData();
   }, []);
 
-
-
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-[#203139] to-[#438FB2]">
-        <div className="mt-12">
-          <h1 className="font-bold text-white text-4xl">Listes Tables</h1>
-          <div className="text-white font-bold text-xl mt-32 border bg-green-700 p-6 rounded-2xl">Chargements des tables...</div>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-tr from-[#203139] to-[#438FB2] text-white">
+        <h1 className="text-3xl font-bold">Listes Tables</h1>
+        <div className="mt-8 text-lg bg-green-700 px-6 py-3 rounded-2xl animate-pulse">
+          Chargement des tables...
         </div>
       </div>
     );
@@ -43,41 +44,34 @@ const List = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col items-center  bg-gradient-to-tr from-[#203139] to-[#438FB2]">
-        <div className="mt-12">
-          <h1 className="font-bold text-white text-4xl">Listes Tables</h1>
-          <div className="text-white font-bold text-xl mt-32 border bg-red-800 p-6 rounded-2xl">Erreur: {error}</div>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-tr from-[#203139] to-[#438FB2] text-white">
+        <h1 className="text-3xl font-bold">Listes Tables</h1>
+        <div className="mt-8 text-lg bg-red-800 px-6 py-3 rounded-2xl">
+          Erreur: {error}
         </div>
       </div>
     );
   }
 
-
-
-
   return (
-    <div className=" min-h-screen flex flex-col items-center  bg-gradient-to-tr from-[#203139] to-[#438FB2]">
-      <div className="mt-12">
-        <h1 className="font-bold text-white text-4xl">Listes Tables</h1>
-      </div>
+    <div className="min-h-screen bg-gradient-to-tr from-[#203139] to-[#438FB2] flex flex-col items-center text-white">
+      <h1 className="text-3xl font-bold mt-12">Listes Tables</h1>
 
       {data.length > 0 ? (
-        <div className="w-full p-5 pl-15 mt-5">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 md:grid-cols-2">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 max-w-6xl mx-auto">
             {data.map((item) => (
               <Card
                 key={item.table}
                 title={item.table}
                 content={item.nombre_ligne}
-                // onDelete={item.table}
+                onDelete={handleDelete}
               />
             ))}
           </div>
         </div>
       ) : (
-        <div className="mt-8 text-white text-lg">
-          La base de données ne contient pas de tables.
-        </div>
+        <div className="mt-8 text-lg">La base de données ne contient pas de tables.</div>
       )}
     </div>
   );

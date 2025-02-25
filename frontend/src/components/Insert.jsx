@@ -1,21 +1,18 @@
 import { useState } from 'react';
 
 const Insert = () => {
-
     const [file, setFile] = useState();
     const [delimiter, setDelimiter] = useState();
+
+    const [notification, setNotification] = useState({ message: "", type: "" });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!file || !delimiter) {
-            alert('Veuillez sélectionner un fichier et un séparateur');
+            setNotification({ message: 'Veuillez sélectionner un fichier et un séparateur.', type: 'error' });
             return;
         }
-
-        const data = { file, delimiter };
-
-        console.log(data)
 
         const formData = new FormData();
         formData.append('file', file);
@@ -28,95 +25,55 @@ const Insert = () => {
             });
 
             if (response.ok) {
-                const data = await response.json();  // Si la réponse est en JSON
-                console.log('Réponse du serveur:', data);
+                setNotification({ message: 'Insertion réussie ! 🎉', type: 'success' });
             } else {
-                console.error('Erreur lors de l\'envoi:', response.statusText);
+                setNotification({ message: `Échec de l'insertion : ${response.statusText}`, type: 'error' });
             }
         } catch (error) {
-            console.error('Erreur réseau:', error);
+            setNotification({ message: `Erreur réseau : ${error.message}`, type: 'error' });
         }
-
-    }
+    };
 
     return (
-        <div className="h-screen flex flex-col items-center justify-center  bg-gradient-to-tr from-[#203139] to-[#438FB2]">
-            <div className=" flex flex-col items-center bg-gray-300 rounded-2xl">
-                <h1 className=" font-bold text-teal-950 mb-10 mt-15">
-                    INSERTION TABLE
-                </h1>
-                <form onSubmit={handleSubmit} encType="multipart/form-data" className=" flex flex-col items-center ml-15 mr-15 mb-15">
-                    <div className="flex flex-col">
-                        <input
-                            type="file"
-                            className="bg-white rounded-3xl mb-5 px-10 p-3"
-                            name="file"
-                            accept=".txt"
-                            onChange={e => setFile(e.target.files[0])}
-
-                        />
-                        <input
-                            list="delimiterList"
-                            type="text"
-                            placeholder="Add Separator"
-                            className="bg-white rounded-3xl mb-5 px-10 p-3"
-                            name='delimiter'
-                            // value={delimiter}
-                            onChange={e => setDelimiter(e.target.value)}
-                        />
-                        <datalist id="delimiterList">
-                            <option value="'"></option>
-                            <option value=","></option>
-                            <option value='"'></option>
-                            <option value="|"></option>
-                            <option value="#"></option>
-                        </datalist>
-
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-[#203139] to-[#438FB2] p-4">
+            <div className="w-full max-w-md bg-gray-300/65 p-6 rounded-2xl shadow-lg flex flex-col items-center">
+                <h1 className="text-xl font-bold text-teal-950 mb-6 text-center">INSERTION TABLE</h1>
+                {notification.message && (
+                    <div className={`mb-4 px-4 py-2 rounded-xl text-sm text-center 
+                        ${notification.type === 'success' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}`}>
+                        {notification.message}
                     </div>
-                    <div className=" flex flex-col items-center">
-                        <button className="  bg-blue-900 text-white px-10 p-2 rounded-2xl hover:bg-blue-800 cursor-pointer">
-                            Continuer
-                        </button>
-                    </div>
-                </form>
-            </div>
-            {/* <div className="flex flex-col items-center">
-                <h2 className="text-2xl text-black font-bold">Upload Data</h2>
-            </div>
-            <form className="m-auto shadow-gray-600" onSubmit={handleSubmit}>
-                <div className="my-16 ">
-                    <label className="text-gray-700 text-xl font-bold mb-2 mt-5 flex flex-col items-center">
-                        Add File here
-                    </label>
+                )}
+                <form onSubmit={handleSubmit} encType="multipart/form-data" className="w-full flex flex-col">
                     <input
-                        className=" border  mx-16 w-[85%] rounded-4xl py-2 px-6"
                         type="file"
-                        name='file'
+                        className="bg-white rounded-xl p-3 w-full mb-4 text-sm"
+                        name="file"
                         accept=".txt"
-                        // value={file}
                         onChange={e => setFile(e.target.files[0])}
                     />
-                    <label className="text-gray-700 text-xl font-bold mb-2 mt-8 flex flex-col items-center">
-                        Add Separator
-                    </label>
                     <input
-                        className=" border  mx-16 w-[85%] rounded-4xl py-2 px-6"
+                        list="delimiterList"
                         type="text"
+                        placeholder="Entrer le separateur de données"
+                        className="bg-white rounded-xl p-3 w-full mb-4 text-sm"
                         name='delimiter'
-                        value={delimiter}
-                        onChange={e=> setDelimiter(e.target.value)}
-                        
-                        placeholder="Please enter only the separator"
+                        onChange={e => setDelimiter(e.target.value)}
                     />
-                </div>
-                <div className="flex flex-col items-center">
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                        Add To Database
+                    <datalist id="delimiterList">
+                        <option value="'"></option>
+                        <option value=","></option>
+                        <option value='"'></option>
+                        <option value="|"></option>
+                        <option value="#"></option>
+                        <option value=" "></option>
+                    </datalist>
+                    <button className="bg-blue-900 text-white py-2 px-4 rounded-xl hover:bg-blue-800 transition duration-200 w-full text-sm">
+                        Continuer
                     </button>
-                </div>
-            </form> */}
+                </form>
+            </div>
         </div>
-
     );
 };
 

@@ -14,7 +14,6 @@ function TableDetails() {
                 if (!response.ok) throw new Error('Network response was not ok');
 
                 const result = await response.json();
-                console.log(result.details)
                 setData(result.details || []);
             } catch (error) {
                 setError(error.message);
@@ -25,12 +24,15 @@ function TableDetails() {
 
         fetchData();
     }, [table]);
+
     if (isLoading) {
         return (
-            <div className=" min-h-screen flex items-center justify-center bg-gradient-to-tr from-[#203139] to-[#438FB2]">
-                <div className="mt-12">
-                    <h1 className="font-bold text-white text-4xl">Details / Requetes</h1>
-                    <div className="text-white font-bold text-xl mt-32 border bg-green-700 p-6 rounded-2xl">Chargements des tables...</div>
+            <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-[#203139] to-[#438FB2]">
+                <div className="mt-12 px-4">
+                    <h1 className="font-bold text-white text-3xl md:text-4xl text-center">Details / Requetes</h1>
+                    <div className="text-white font-bold text-xl mt-8 md:mt-32 border bg-green-700 p-4 md:p-6 rounded-2xl text-center">
+                        Chargements des tables...
+                    </div>
                 </div>
             </div>
         );
@@ -38,10 +40,12 @@ function TableDetails() {
 
     if (error) {
         return (
-            <div className=" min-h-screen flex flex-col items-center  bg-gradient-to-tr from-[#203139] to-[#438FB2]">
-                <div className="mt-12">
-                    <h1 className="font-bold text-white text-4xl">Details / Requetes</h1>
-                    <div className="text-white font-bold text-xl mt-32 border bg-red-800 p-6 rounded-2xl">Erreur: {error}</div>
+            <div className="min-h-screen flex flex-col items-center bg-gradient-to-tr from-[#203139] to-[#438FB2]">
+                <div className="mt-12 px-4">
+                    <h1 className="font-bold text-white text-3xl md:text-4xl text-center">Details / Requetes</h1>
+                    <div className="text-white font-bold text-xl mt-8 md:mt-32 border bg-red-800 p-4 md:p-6 rounded-2xl text-center">
+                        Erreur: {error}
+                    </div>
                 </div>
             </div>
         );
@@ -49,18 +53,26 @@ function TableDetails() {
 
     const headers = data.length > 0 ? data[0] : [];
     const rows = data.length > 0 ? data.slice(1) : [];
+
     return (
-        <div className="min-h-screen flex flex-col items-center  bg-gradient-to-tr from-[#203139] to-[#438FB2]">
-            <div className="mt-10">
-                <h1 className="font-bold text-white text-4xl">Details / Requetes</h1>
+        <div className="min-h-screen flex flex-col items-center bg-gradient-to-tr from-[#203139] to-[#438FB2] p-4">
+            <div className="mt-4 md:mt-10 px-2">
+                <h1 className="font-bold text-white text-3xl md:text-4xl text-center">Details / Requetes</h1>
             </div>
-            <div className="w-full grid grid-cols-5 gap-4 mt-5 ">
-                <div className="w-full col-span-3 bg-white p-2 rounded-lg">
-                    <table className="w-full border border-gray-300">
+
+            <div className="w-full grid grid-cols-1 md:grid-cols-5 gap-4 mt-4 md:mt-5">
+                {/* Table Container - Full width on mobile, 3 cols on desktop */}
+                <div className="w-full md:col-span-3 bg-white p-2 rounded-lg overflow-x-auto">
+                    <table className="w-full border border-gray-300 min-w-[600px] md:min-w-0">
                         <thead>
                             <tr className="bg-gray-200">
                                 {headers.map((header, index) => (
-                                    <th key={index} className="border border-gray-300 p-2">{header}</th>
+                                    <th
+                                        key={index}
+                                        className="border border-gray-300 p-1 md:p-2 text-sm md:text-base"
+                                    >
+                                        {header}
+                                    </th>
                                 ))}
                             </tr>
                         </thead>
@@ -68,21 +80,32 @@ function TableDetails() {
                             {rows.map((row, rowIndex) => (
                                 <tr key={rowIndex} className="border border-gray-300">
                                     {row.map((cell, cellIndex) => (
-                                        <td key={cellIndex} className="border border-gray-300 p-2">{cell}</td>
+                                        <td
+                                            key={cellIndex}
+                                            className="border border-gray-300 p-1 md:p-2 text-sm md:text-base truncate"
+                                            title={cell} // Show full text on hover
+                                        >
+                                            {cell}
+                                        </td>
                                     ))}
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
-                <div className="w-full col-span-2 bg-white p-4 rounded-lg shadow-lg relative">
+
+                {/* Side Panel - Full width on mobile, 2 cols on desktop */}
+                <div className="w-full md:col-span-2 bg-white p-4 rounded-lg shadow-lg relative h-fit md:h-auto">
                     <h2 className="text-lg font-bold">REQUETES Mbola tsy vita</h2>
-                    <button className="absolute top-2 right-2">🌙</button>
-                    <div className="h-64 overflow-auto mt-2 border-t border-gray-300"></div>
-                    <button className="absolute bottom-2 right-2 text-blue-500">➤</button>
+                    <button className="absolute top-2 right-2 text-lg">🌙</button>
+                    <div className="h-48 md:h-64 overflow-auto mt-2 border-t border-gray-300">
+                        {/* Add your content here */}
+                    </div>
+                    <button className="absolute bottom-2 right-2 text-blue-500 text-lg">➤</button>
                 </div>
             </div>
         </div>
     );
 }
+
 export default TableDetails;
