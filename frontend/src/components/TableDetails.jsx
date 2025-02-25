@@ -7,6 +7,8 @@ function TableDetails() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
+
+
     useEffect(() => {
         const fetchData = async () => {
             try {

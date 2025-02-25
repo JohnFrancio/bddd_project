@@ -1,11 +1,3 @@
-// try {
-//     const reponse = fetch(`http://127.0.0.1:8000/api/table-details/${title}/`, {
-//         method: 'GET'
-//     });
-//     if (!response.ok) throw new Error('Network response was not ok');
-//     const result = await response.json();
-//     console.log(result);
-// }
 import db from "../assets/db.png";
 import PropTypes from "prop-types";
 
@@ -25,7 +17,8 @@ const Card = (
 
     const handleDetails = async () => {
         console.log(`Fetching details for table: ${title}`);
-        navigate(`/list/table/${title}`);
+        navigate(`/list/table/${title}`, { state: { fromList: true, table: title } });
+        
     }
 
     const handleDeleteConfirmation = async () => {

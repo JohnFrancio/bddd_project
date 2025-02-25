@@ -1,11 +1,15 @@
-
 import { useState } from 'react';
 import { FaHome, FaList } from "react-icons/fa";
+import { MdTableChart } from "react-icons/md";
 import { BsDatabaseAdd } from "react-icons/bs";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
+
+    const location = useLocation();
+    const showTableDetails = location.state?.fromList || false;
+    const tableName = location.state?.table;
 
     return (
         <>
@@ -81,6 +85,23 @@ const Sidebar = () => {
                                 <span>LISTES TABLES</span>
                             </NavLink>
                         </li>
+
+                        {/* Conditionally Render "Table Details" */}
+                        {showTableDetails && (
+                            <li className="my-2 w-full">
+                                <NavLink
+                                    to={`/list/table/${tableName}`}
+                                    className={({ isActive }) =>
+                                        `flex items-center space-x-5 py-2 px-4 rounded transition-colors relative ${isActive ? "bg-gray-700 font-bold" : "hover:bg-gray-700"
+                                        }`
+                                    }
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    <MdTableChart className="text-xl" />
+                                    <span>TABLE DETAILS</span>
+                                </NavLink>
+                            </li>
+                        )}
                     </ul>
                 </nav>
             </div>
