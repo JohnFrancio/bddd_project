@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
+import { FaHourglassEnd } from "react-icons/fa";
+import { MdSend } from "react-icons/md";
 import { useParams } from "react-router-dom";
+
+
 
 function TableDetails() {
     const { table } = useParams();
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,6 +28,43 @@ function TableDetails() {
 
         fetchData();
     }, [table]);
+    // Request Query 
+    // New states for query execution
+    const [query, setQuery] = useState("");
+    const [requestData, setRequestData] = useState([]);
+    const [isRequestLoading, setIsRequestLoading] = useState(false);
+    const [requestError, setRequestError] = useState(null);
+
+    const handleExecute = async () => {
+        if (!query.trim()) return;
+
+        setIsRequestLoading(true);
+        setRequestError(null);
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/execute-query/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ query: query.trim() }),
+            });
+
+            if (!response.ok) throw new Error('Execution failed');
+
+            const result = await response.json();
+            setRequestData(result.details || []);
+        } catch (error) {
+            setRequestError(error.message);
+            setRequestData([]);
+        } finally {
+            setIsRequestLoading(false);
+        }
+    };
+
+
+    const requestHeaders = requestData.length > 0 ? requestData[0] : [];
+    const requestRows = requestData.length > 0 ? requestData.slice(1) : [];
+
 
     if (isLoading) {
         return (
@@ -97,13 +136,87 @@ function TableDetails() {
                 </div>
 
                 {/* Side Panel - Full width on mobile, 2 cols on desktop */}
-                <div className="w-full md:col-span-2 bg-white p-4 rounded-lg shadow-lg relative h-fit md:h-auto">
-                    <h2 className="text-lg font-bold">REQUETES Mbola tsy vita</h2>
+                {/* <div className="w-full md:col-span-2 bg-white p-4 rounded-lg shadow-lg relative h-fit md:h-auto"> */}
+                {/* Divide this part to 2 on row
+                    - One is a input to insert a Request
+                    - the other show the result of the request */}
+                {/* <h2 className="text-lg font-bold">REQUETES Mbola tsy vita</h2>
                     <button className="absolute top-2 right-2 text-lg">🌙</button>
                     <div className="h-48 md:h-64 overflow-auto mt-2 border-t border-gray-300">
-                        {/* Add your content here */}
+                        
                     </div>
-                    <button className="absolute bottom-2 right-2 text-blue-500 text-lg">➤</button>
+                    <button className="absolute bottom-2 right-2 text-blue-500 text-lg">➤</button> */}
+                {/* </div> */}
+
+                <div className="w-full md:col-span-2 bg-white p-4 rounded-lg shadow-lg flex flex-col gap-4 h-[600px]">
+                    {/* Query Input Section */}
+                    <div className="flex-1 relative">
+                        <h2 className="text-lg font-bold mb-2">SQL Query</h2>
+                        <textarea
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            className="w-full h-[calc(100%-40px)] p-2 border rounded resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Enter your SQL query here..."
+                            disabled={isRequestLoading}
+                        />
+                        <button
+                            onClick={handleExecute}
+                            disabled={!query.trim() || isRequestLoading}
+                            className="absolute bottom-2 right-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                        >
+                            {isRequestLoading ? <FaHourglassEnd /> : <MdSend />}
+                        </button>
+                    </div>
+
+                    {/* Results Section */}
+                    <div className="flex-1 flex flex-col">
+                        <h2 className="text-lg font-bold mb-2">Results</h2>
+                        <div className="flex-1 overflow-auto border rounded">
+                            {isRequestLoading ? (
+                                <div className="h-full flex items-center justify-center text-gray-500">
+                                    Executing query...
+                                </div>
+                            ) : requestError ? (
+                                <div className="h-full flex items-center justify-center text-red-500 p-4 text-center">
+                                    Error: {requestError}
+                                </div>
+                            ) : requestData.length > 0 ? (
+                                <table className="w-full border border-gray-300">
+                                    <thead>
+                                        <tr className="bg-gray-200">
+                                            {requestHeaders.map((header, index) => (
+                                                <th
+                                                    key={index}
+                                                    className="border border-gray-300 p-2 text-sm md:text-base"
+                                                >
+                                                    {header}
+                                                </th>
+                                            ))}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {requestRows.map((row, rowIndex) => (
+                                            <tr key={rowIndex} className="border border-gray-300">
+                                                {row.map((cell, cellIndex) => (
+                                                    <td
+                                                        key={cellIndex}
+                                                        className="border border-gray-300 p-2 text-sm md:text-base truncate"
+                                                        title={cell}
+                                                    >
+                                                        {cell}
+                                                    </td>
+                                                ))}
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                <div className="h-full flex items-center justify-center text-gray-500">
+                                    No results to display
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
