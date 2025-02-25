@@ -97,7 +97,7 @@ function TableDetails() {
 
     return (
         <div className="min-h-screen flex flex-col items-center bg-gradient-to-tr from-[#203139] to-[#438FB2] p-4">
-            <div className="mt-4 md:mt-10 px-2">
+            <div className="mt-4 md:mt-2 px-2">
                 <h1 className="font-bold text-white text-3xl md:text-4xl text-center">Details / Requetes</h1>
             </div>
 
@@ -141,9 +141,9 @@ function TableDetails() {
                     - One is a input to insert a Request
                     - the other show the result of the request */}
                 {/* <h2 className="text-lg font-bold">REQUETES Mbola tsy vita</h2>
-                    <button className="absolute top-2 right-2 text-lg">🌙</button>
                     <div className="h-48 md:h-64 overflow-auto mt-2 border-t border-gray-300">
-                        
+                    <button className="absolute top-0 right-2 text-lg">🌙</button>
+                    
                     </div>
                     <button className="absolute bottom-2 right-2 text-blue-500 text-lg">➤</button> */}
                 {/* </div> */}
