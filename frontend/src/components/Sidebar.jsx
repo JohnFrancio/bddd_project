@@ -53,7 +53,7 @@ const Sidebar = () => {
                             >
                                 <FaHome className="text-xl" />
                                 <span>
-                                    ACCEUIL
+                                    ACCUEIL
                                 </span>
                             </NavLink>
                         </li>

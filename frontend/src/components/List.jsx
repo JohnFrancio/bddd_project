@@ -34,7 +34,7 @@ const List = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-tr from-[#203139] to-[#438FB2] text-white">
-        <h1 className="text-3xl font-bold">Listes Tables</h1>
+        <h1 className="text-3xl font-bold">LISTES TABLES</h1>
         <div className="mt-8 text-lg bg-green-700 px-6 py-3 rounded-2xl animate-pulse">
           Chargement des tables...
         </div>
@@ -45,7 +45,7 @@ const List = () => {
   if (error) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-tr from-[#203139] to-[#438FB2] text-white">
-        <h1 className="text-3xl font-bold">Listes Tables</h1>
+        <h1 className="text-3xl font-bold">LISTES TABLES</h1>
         <div className="mt-8 text-lg bg-red-800 px-6 py-3 rounded-2xl">
           Erreur: {error}
         </div>
@@ -55,11 +55,11 @@ const List = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-tr from-[#203139] to-[#438FB2] flex flex-col items-center text-white">
-      <h1 className="text-3xl font-bold mt-12">Listes Tables</h1>
+      <h1 className="text-3xl font-bold mt-12">LISTES TABLES</h1>
 
       {data.length > 0 ? (
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 max-w-6xl mx-auto">
+        <div className="container p-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 max-w-6xl mx-auto">
             {data.map((item) => (
               <Card
                 key={item.table}

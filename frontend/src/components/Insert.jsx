@@ -37,14 +37,14 @@ const Insert = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-[#203139] to-[#438FB2] p-4">
             <div className="w-full max-w-md bg-gray-300/65 p-6 rounded-2xl shadow-lg flex flex-col items-center">
-                <h1 className="text-xl font-bold text-teal-950 mb-6 text-center">INSERTION TABLE</h1>
+                <h1 className="text-xl font-bold text-teal-950 text-center">INSERTION TABLE</h1>
                 {notification.message && (
                     <div className={`mb-4 px-4 py-2 rounded-xl text-sm text-center 
                         ${notification.type === 'success' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}`}>
                         {notification.message}
                     </div>
                 )}
-                <form onSubmit={handleSubmit} encType="multipart/form-data" className="w-full flex flex-col">
+                <form onSubmit={handleSubmit} encType="multipart/form-data" className="w-full p-16 flex flex-col">
                     <input
                         type="file"
                         className="bg-white rounded-xl p-3 w-full mb-4 text-sm"

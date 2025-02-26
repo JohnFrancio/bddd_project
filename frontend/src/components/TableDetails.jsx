@@ -41,7 +41,7 @@ function TableDetails() {
         setIsRequestLoading(true);
         setRequestError(null);
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/execute-query/', {
+            const response = await fetch('http://127.0.0.1:8000/api/executer-requete/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -52,7 +52,9 @@ function TableDetails() {
             if (!response.ok) throw new Error('Execution failed');
 
             const result = await response.json();
-            setRequestData(result.details || []);
+            console.log(result.result);
+            setRequestData(result.result || []);
+            
         } catch (error) {
             setRequestError(error.message);
             setRequestData([]);
