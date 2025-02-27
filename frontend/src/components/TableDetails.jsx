@@ -150,7 +150,7 @@ function TableDetails() {
                     <button className="absolute bottom-2 right-2 text-blue-500 text-lg">➤</button> */}
                 {/* </div> */}
 
-                <div className="w-full md:col-span-2 bg-white p-4 rounded-lg shadow-lg flex flex-col gap-4 h-[600px]">
+                <div className="w-full md:col-span-2 bg-white p-4 rounded-lg shadow-lg flex flex-col gap-4 h-[600px] overflow-auto">
                     {/* Query Input Section */}
                     <div className="flex-1 relative">
                         <h2 className="text-lg font-bold mb-2">SQL Query</h2>

@@ -18,7 +18,7 @@ const Card = (
     const handleDetails = async () => {
         console.log(`Fetching details for table: ${title}`);
         navigate(`/list/table/${title}`, { state: { fromList: true, table: title } });
-        
+
     }
 
     const handleDeleteConfirmation = async () => {
@@ -65,7 +65,7 @@ const Card = (
                 <button className="px-6 py-2 rounded hover:bg-gray-700" onClick={handleDetails}>
                     <FaEdit size={25} />
                 </button>
-                <button className="px-6 py-2 rounded hover:bg-gray-700">
+                <button className="px-6 py-2 rounded hover:bg-gray-700" onClick={handleDetails}>
                     <FaCalculator size={25} />
                 </button>
             </div>
