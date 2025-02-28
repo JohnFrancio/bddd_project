@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { FaHourglassEnd } from "react-icons/fa";
+import { FaHourglassEnd, FaCalculator } from "react-icons/fa";
 import { MdSend } from "react-icons/md";
 import { useParams } from "react-router-dom";
-
+import ModalChoice from "./ModalChoice";
 
 
 function TableDetails() {
@@ -10,6 +10,15 @@ function TableDetails() {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Request Query 
+    // New states for query execution
+    const [query, setQuery] = useState("");
+    const [requestData, setRequestData] = useState([]);
+    const [isRequestLoading, setIsRequestLoading] = useState(false);
+    const [requestError, setRequestError] = useState(null);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,12 +37,8 @@ function TableDetails() {
 
         fetchData();
     }, [table]);
-    // Request Query 
-    // New states for query execution
-    const [query, setQuery] = useState("");
-    const [requestData, setRequestData] = useState([]);
-    const [isRequestLoading, setIsRequestLoading] = useState(false);
-    const [requestError, setRequestError] = useState(null);
+
+
 
     const handleExecute = async () => {
         if (!query.trim()) return;
@@ -52,9 +57,9 @@ function TableDetails() {
             if (!response.ok) throw new Error('Execution failed');
 
             const result = await response.json();
-            console.log(result.result);
+            // console.log(result.result);
             setRequestData(result.result || []);
-            
+
         } catch (error) {
             setRequestError(error.message);
             setRequestData([]);
@@ -62,7 +67,35 @@ function TableDetails() {
             setIsRequestLoading(false);
         }
     };
+    const handleSum = async (colTosum) => {
+        setIsModalOpen(false);
+        console.log(colTosum)
 
+        const rqst = `select sum(${colTosum}::numeric) as "Somme ${colTosum}" from ${table}`;
+        setIsRequestLoading(true);
+        setRequestError(null);
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/executer-requete/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ query: rqst.trim() }),
+            });
+
+            if (!response.ok) throw new Error('Execution failed');
+
+            const result = await response.json();
+            console.log(result.result);
+            setRequestData(result.result || []);
+
+        } catch (error) {
+            setRequestError(error.message);
+            setRequestData([]);
+        } finally {
+            setIsRequestLoading(false);
+        }
+    };
 
     const requestHeaders = requestData.length > 0 ? requestData[0] : [];
     const requestRows = requestData.length > 0 ? requestData.slice(1) : [];
@@ -96,6 +129,15 @@ function TableDetails() {
 
     const headers = data.length > 0 ? data[0] : [];
     const rows = data.length > 0 ? data.slice(1) : [];
+
+    // console.log(headers);
+
+
+
+
+
+
+
 
     return (
         <div className="min-h-screen flex flex-col items-center bg-gradient-to-tr from-[#203139] to-[#438FB2] p-4">
@@ -137,19 +179,6 @@ function TableDetails() {
                     </table>
                 </div>
 
-                {/* Side Panel - Full width on mobile, 2 cols on desktop */}
-                {/* <div className="w-full md:col-span-2 bg-white p-4 rounded-lg shadow-lg relative h-fit md:h-auto"> */}
-                {/* Divide this part to 2 on row
-                    - One is a input to insert a Request
-                    - the other show the result of the request */}
-                {/* <h2 className="text-lg font-bold">REQUETES Mbola tsy vita</h2>
-                    <div className="h-48 md:h-64 overflow-auto mt-2 border-t border-gray-300">
-                    <button className="absolute top-0 right-2 text-lg">🌙</button>
-                    
-                    </div>
-                    <button className="absolute bottom-2 right-2 text-blue-500 text-lg">➤</button> */}
-                {/* </div> */}
-
                 <div className="w-full md:col-span-2 bg-white p-4 rounded-lg shadow-lg flex flex-col gap-4 h-[600px] overflow-auto">
                     {/* Query Input Section */}
                     <div className="flex-1 relative">
@@ -168,6 +197,20 @@ function TableDetails() {
                         >
                             {isRequestLoading ? <FaHourglassEnd /> : <MdSend />}
                         </button>
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            // disabled={!query.trim() || isRequestLoading}
+                            className="absolute bottom-2 right-20 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                        >
+                            {isRequestLoading ? <FaHourglassEnd /> : <FaCalculator />}
+                        </button>
+                        <ModalChoice
+                            isOpen={isModalOpen}
+                            onClose={() => setIsModalOpen(false)}
+                            onConfirm={handleSum}
+                            headers={headers}
+
+                        />
                     </div>
 
                     {/* Results Section */}

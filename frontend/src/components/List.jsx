@@ -58,8 +58,7 @@ const List = () => {
       <h1 className="text-3xl font-bold mt-12">LISTES TABLES</h1>
 
       {data.length > 0 ? (
-        <div className="container p-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14 mt-6 ">
             {data.map((item) => (
               <Card
                 key={item.table}
@@ -68,7 +67,6 @@ const List = () => {
                 onDelete={handleDelete}
               />
             ))}
-          </div>
         </div>
       ) : (
         <div className="mt-8 text-lg">La base de données ne contient pas de tables.</div>

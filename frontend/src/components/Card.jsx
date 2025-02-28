@@ -9,9 +9,8 @@ import Modal from "./Modal";
 import { useNavigate } from "react-router-dom";
 
 
-const Card = (
-    { title, content, image, onDelete }
-) => {
+const Card = ({ title, content, image, onDelete }) => {
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate();
 
