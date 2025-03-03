@@ -104,7 +104,7 @@ function TableDetails() {
         setIsModalOpen(false);
         console.log(colTosum)
 
-        const rqst = `select sum(${colTosum}::numeric) as "Somme ${colTosum}" from ${table}`;
+        const rqst = `select avg(${colTosum}::numeric) as "Moyenne ${colTosum}" from ${table}`;
         setIsRequestLoading(true);
         setRequestError(null);
         try {
