@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 
-const ModalChoice = ({ isOpen, onClose, onConfirm, headers }) => {
+const ModalSum = ({ isOpen, onClose, onConfirm, headers }) => {
     if (!isOpen) return null;
 
 
@@ -54,11 +54,11 @@ const ModalChoice = ({ isOpen, onClose, onConfirm, headers }) => {
     )
 }
 
-ModalChoice.propTypes = {
+ModalSum.propTypes = {
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     onConfirm: PropTypes.func.isRequired,
     headers: PropTypes.array
 }
 
-export default ModalChoice;
+export default ModalSum;

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { FaHourglassEnd, FaCalculator } from "react-icons/fa";
 import { MdSend } from "react-icons/md";
+import { VscGraph } from "react-icons/vsc";
 import { useParams } from "react-router-dom";
-import ModalChoice from "./ModalChoice";
+import ModalSum from "./ModalSum";
+import ModalAvg from "./ModalAvg";
 
 
 function TableDetails() {
@@ -67,7 +69,38 @@ function TableDetails() {
             setIsRequestLoading(false);
         }
     };
+
     const handleSum = async (colTosum) => {
+        setIsModalOpen(false);
+        console.log(colTosum)
+
+        const rqst = `select sum(${colTosum}::numeric) as "Somme ${colTosum}" from ${table}`;
+        setIsRequestLoading(true);
+        setRequestError(null);
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/executer-requete/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ query: rqst.trim() }),
+            });
+
+            if (!response.ok) throw new Error('Execution failed');
+
+            const result = await response.json();
+            console.log(result.result);
+            setRequestData(result.result || []);
+
+        } catch (error) {
+            setRequestError(error.message);
+            setRequestData([]);
+        } finally {
+            setIsRequestLoading(false);
+        }
+    };
+
+    const handleAvg = async (colTosum) => {
         setIsModalOpen(false);
         console.log(colTosum)
 
@@ -204,10 +237,24 @@ function TableDetails() {
                         >
                             {isRequestLoading ? <FaHourglassEnd /> : <FaCalculator />}
                         </button>
-                        <ModalChoice
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            // disabled={!query.trim() || isRequestLoading}
+                            className="absolute bottom-2 right-40 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                        >
+                            {isRequestLoading ? <FaHourglassEnd /> : <VscGraph />}
+                        </button>
+                        <ModalSum
                             isOpen={isModalOpen}
                             onClose={() => setIsModalOpen(false)}
                             onConfirm={handleSum}
+                            headers={headers}
+
+                        />
+                        <ModalAvg
+                            isOpen={isModalOpen}
+                            onClose={() => setIsModalOpen(false)}
+                            onConfirm={handleAvg}
                             headers={headers}
 
                         />
