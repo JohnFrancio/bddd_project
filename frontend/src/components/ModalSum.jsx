@@ -21,7 +21,7 @@ const ModalSum = ({ isOpen, onClose, onConfirm, headers }) => {
                     {headers.map((champ, index) => (
                         <button
                             key={index}
-                            className="p-2 m-3 border-2 bg-[#4363ad] rounded-4xl text-white hover:bg-[#5c8dff]"
+                            className="p-2 m-3 border bg-[#4363ad] rounded-2xl text-white hover:bg-[#5c8dff]"
                             onClick={() => {
                                 onConfirm(champ);
                                 onClose();
