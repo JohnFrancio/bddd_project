@@ -231,8 +231,8 @@ function TableDetails() {
                             >
                                 {isRequestLoading ? <FaHourglassEnd /> : <MdSend />}
                             </button>
-                            <div className="absolute bottom-14 right-40 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800 text-white text-sm rounded-md px-3 py-1 whitespace-nowrap z-10">
-                                Zero1
+                            <div className="absolute bottom-14 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800 text-white text-sm rounded-md px-3 py-1 whitespace-nowrap z-10">
+                                Execute
                             </div>
                         </div>
                         <div className="relative group inline-block">
@@ -243,8 +243,8 @@ function TableDetails() {
                             >
                                 {isRequestLoading ? <FaHourglassEnd /> : <FaCalculator />}
                             </button>
-                            <div className="absolute bottom-14 right-40 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800 text-white text-sm rounded-md px-3 py-1 whitespace-nowrap z-10">
-                                Zero2
+                            <div className="absolute bottom-14 right-20 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800 text-white text-sm rounded-md px-3 py-1 whitespace-nowrap z-10">
+                                Sommes
                             </div>
                         </div>
                         <div className="relative group inline-block">
@@ -256,7 +256,7 @@ function TableDetails() {
                                 {isRequestLoading ? <FaHourglassEnd /> : <VscGraph />}
                             </button>
                             <div className="absolute bottom-14 right-40 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800 text-white text-sm rounded-md px-3 py-1 whitespace-nowrap z-10">
-                                Zero3
+                                Moyenne
                             </div>
                         </div>
 
