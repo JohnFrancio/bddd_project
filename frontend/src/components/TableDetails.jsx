@@ -223,27 +223,45 @@ function TableDetails() {
                             placeholder="Enter your SQL query here..."
                             disabled={isRequestLoading}
                         />
-                        <button
-                            onClick={handleExecute}
-                            disabled={!query.trim() || isRequestLoading}
-                            className="absolute bottom-2 right-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-                        >
-                            {isRequestLoading ? <FaHourglassEnd /> : <MdSend />}
-                        </button>
-                        <button
-                            onClick={() => setIsModalOpen(true)}
-                            // disabled={!query.trim() || isRequestLoading}
-                            className="absolute bottom-2 right-20 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-                        >
-                            {isRequestLoading ? <FaHourglassEnd /> : <FaCalculator />}
-                        </button>
-                        <button
-                            onClick={() => setIsModalOpen(true)}
-                            // disabled={!query.trim() || isRequestLoading}
-                            className="absolute bottom-2 right-40 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-                        >
-                            {isRequestLoading ? <FaHourglassEnd /> : <VscGraph />}
-                        </button>
+                        <div className="relative group inline-block">
+                            <button
+                                onClick={handleExecute}
+                                disabled={!query.trim() || isRequestLoading}
+                                className="absolute bottom-2 right-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                            >
+                                {isRequestLoading ? <FaHourglassEnd /> : <MdSend />}
+                            </button>
+                            <div className="absolute bottom-14 right-40 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800 text-white text-sm rounded-md px-3 py-1 whitespace-nowrap z-10">
+                                Zero1
+                            </div>
+                        </div>
+                        <div className="relative group inline-block">
+                            <button
+                                onClick={() => setIsModalOpen(true)}
+                                // disabled={!query.trim() || isRequestLoading}
+                                className="absolute bottom-2 right-20 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                            >
+                                {isRequestLoading ? <FaHourglassEnd /> : <FaCalculator />}
+                            </button>
+                            <div className="absolute bottom-14 right-40 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800 text-white text-sm rounded-md px-3 py-1 whitespace-nowrap z-10">
+                                Zero2
+                            </div>
+                        </div>
+                        <div className="relative group inline-block">
+                            <button
+                                onClick={() => setIsModalOpen(true)}
+                                // disabled={!query.trim() || isRequestLoading}
+                                className="absolute bottom-2 right-40 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                            >
+                                {isRequestLoading ? <FaHourglassEnd /> : <VscGraph />}
+                            </button>
+                            <div className="absolute bottom-14 right-40 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800 text-white text-sm rounded-md px-3 py-1 whitespace-nowrap z-10">
+                                Zero3
+                            </div>
+                        </div>
+
+
+
                         <ModalSum
                             isOpen={isModalOpen}
                             onClose={() => setIsModalOpen(false)}
